@@ -4,7 +4,7 @@
 # Note: If you wish to whitelist plugins,
 # uncomment the next line
 #/wp-content/plugins
-/plugins/woocommerce
+plugins/woocommerce
 
 # All themes
 #
