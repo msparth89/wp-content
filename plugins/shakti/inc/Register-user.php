@@ -293,7 +293,7 @@ function send_sms($phone_number, $code, $method)
             $custom = new Shakti_SMS();
             error_log(print_r("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++", $code));
 
-            return $custom->lwp_send_sms($phone_number, $code);
+            // return $custom->lwp_send_sms($phone_number, $code);
         } else {
             error_log(print_r("99999999999999999999999999999999999999999999999999999999999999999999999", true));
             error_log(print_r($code, true));
