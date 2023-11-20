@@ -33,7 +33,9 @@ function Register_sms(  ) {
         $options = get_option('idehweb_lwp_settings');
         if($shakti==false)
         {
-            error_log(print_r("tttttttttttttttttttttttttttttttttttttttttttttttttttttttt", true));
+            die ('Busted!');
+
+            // error_log(print_r("tttttttttttttttttttttttttttttttttttttttttttttttttttttttt", true));
         if (!wp_verify_nonce($_GET['nonce'], 'lwp_login')) {
             die ('Busted!');
         }
