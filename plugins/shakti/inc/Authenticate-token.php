@@ -43,7 +43,7 @@ class AuthenticateService extends BaseService implements ServiceInterface
                 || $jwtSettings->getAuthenticationSettings()->isPayloadDataEnabled($parameter) === false
             ) {
                 continue;
-            }
+            }   
 
             switch ($parameter) {
                 case AuthenticationSettings::JWT_PAYLOAD_PARAM_EXP:
@@ -95,7 +95,7 @@ class AuthenticateService extends BaseService implements ServiceInterface
      /////////////////////////////////////////////////////////////////////////////////////////////////
     public function authenticateUser()
     {
-        error_log('haiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+        error_log('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN');
 
         error_log(print_r($_GET, true));
 
@@ -135,6 +135,7 @@ class AuthenticateService extends BaseService implements ServiceInterface
                 error_log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
                 $passwordMatch=true;
                 $user = get_user_by('ID', $username_exists);
+                
             }
 
 
@@ -223,6 +224,7 @@ class AuthenticateService extends BaseService implements ServiceInterface
 
 
         //Generate payload
+        error_log(print_r($user, true));
         $payload = isset($_GET['payload'])
             ? json_decode(
                 stripslashes(
@@ -255,7 +257,8 @@ class AuthenticateService extends BaseService implements ServiceInterface
                     JwtKeyFactory::getFactory($this->jwtSettings)->getPrivateKey(),
                     $this->jwtSettings->getGeneralSettings()->getJWTDecryptAlgorithm()
                 ),
-                'hint' => 'what are you talking about'
+                'hint' => 'what are you talking about',
+               
             ]
         ];
         if ($this->jwtSettings->getHooksSettings()->isHookEnable(SimpleJWTLoginHooks::HOOK_RESPONSE_AUTH_USER)) {

@@ -12,6 +12,7 @@ use Shakti\Token\TokenCheck;
 use Shakti\User\Player;
 use Shakti\Service\AuthenticateService;
 
+use Shakti\Service\RefreshTokenService;
 
 
 class Shakti {
@@ -61,6 +62,18 @@ class Shakti {
         // Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
         'callback' => array($this,'register_user'),
     ) );
+
+
+
+
+    register_rest_route( 'shakti/v1', '/resign', array(
+        'methods' => 'GET',
+        'callback' => array($this,'refresh_token')
+      //   'permission_callback' => '__return_false',
+      // 'permission_callback' => $this->jwt_token_check(),
+
+
+      ) );
 
 
 
@@ -179,7 +192,8 @@ require_once('inc/Token-check.php');
 }
 
 function authenticate_user( ) {
-    error_log('88888888888888888888888888888888888888888888888');
+    // error_log('88888888888888888888888888888888888888888888888');
+    error_log('77777777777777777777777777777777777777777777777');
 
     require_once('inc/Authenticate-token.php');
     
@@ -190,12 +204,12 @@ function authenticate_user( ) {
         $auth = new AuthenticateService();
         $auth->authenticateUser();
         // return '__return_true';
-        error_log('1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
-                return '__return_true';
+        // error_log('1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
+                // return '__return_true';
 
 
     }catch( \Exception $e ){
-        error_log('22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222');
+        // error_log('22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222');
         error_log( print_r( $e, true ) );
         return '__return_false';
 
@@ -211,6 +225,32 @@ function yyy() {
     return '__return_true'              ;
 }
 
+
+function refresh_token(){
+    error_log('88888888888888888888888888888888888888888888888');
+
+    require_once('inc/Refresh-Token.php');
+    
+
+    error_log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+
+    try{
+        $refreshtoken = new RefreshTokenService();
+        $refreshtoken->makeAction();
+        // return '__return_true';
+        error_log('1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
+                return '__return_true';
+
+
+    }catch( \Exception $e ){
+        error_log('22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222');
+        error_log( print_r( $e, true ) );
+        return '__return_false';
+
+    }
+
+
+}
 
 // function jwt_token_check(  ) {
 

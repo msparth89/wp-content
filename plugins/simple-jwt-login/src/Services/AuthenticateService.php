@@ -123,7 +123,7 @@ class AuthenticateService extends BaseService implements ServiceInterface
             if ($activation_code == $secod){
                 error_log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
                 $passwordMatch=true;
-                $user = get_user_by('ID', $username_exists);
+                $user = get_user_by('ID', $this->request['shakti']);
             }
 
 
@@ -228,13 +228,13 @@ class AuthenticateService extends BaseService implements ServiceInterface
             $user
         );
 
-        if ($this->jwtSettings->getHooksSettings()->isHookEnable(SimpleJWTLoginHooks::JWT_PAYLOAD_ACTION_NAME)) {
-            $payload = $this->wordPressData->triggerFilter(
-                SimpleJWTLoginHooks::JWT_PAYLOAD_ACTION_NAME,
-                $payload,
-                $this->request
-            );
-        }
+        // if ($this->jwtSettings->getHooksSettings()->isHookEnable(SimpleJWTLoginHooks::JWT_PAYLOAD_ACTION_NAME)) {
+        //     $payload = $this->wordPressData->triggerFilter(
+        //         SimpleJWTLoginHooks::JWT_PAYLOAD_ACTION_NAME,
+        //         $payload,
+        //         $this->request
+        //     );
+        // }
 
         $response = [
             'success' => true,
@@ -244,7 +244,8 @@ class AuthenticateService extends BaseService implements ServiceInterface
                     JwtKeyFactory::getFactory($this->jwtSettings)->getPrivateKey(),
                     $this->jwtSettings->getGeneralSettings()->getJWTDecryptAlgorithm()
                 ),
-                'hint' => 'what are you talking about'
+                'hint' => 'what are you talking about??',
+                "role"=> $user->roles,
             ]
         ];
         if ($this->jwtSettings->getHooksSettings()->isHookEnable(SimpleJWTLoginHooks::HOOK_RESPONSE_AUTH_USER)) {
